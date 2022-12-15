@@ -3,26 +3,17 @@ const shortId = require("shortid");
 const redis = require("redis");
 const { promisify } = require("util");
 const axios = require("axios");
-const validUrl = require("valid-url")
 
 function stringVerify(value) {
-    if (typeof value == "undefined" || typeof value == null) {
-        return false;
-    }
-    if (typeof value != "string" || value.trim().length == 0) {
-        return false;
-    }
-    return true;
-};
-// function stringVerify(value) {
-//     if (typeof value !== "string" || value.trim().length == 0) {
-//       return false
-//     } return true
-//   }
+    if (typeof value !== "string" || value.trim().length == 0) {
+      return false
+    } return true
+  }
+
 function isValidURL(value) {
     let urlregex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
     return urlregex.test(value)
-};
+}
 
 
 //------------------------------REDIS IMPLEMENTATION----------------------//
