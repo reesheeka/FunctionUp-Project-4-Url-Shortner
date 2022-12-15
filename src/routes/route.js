@@ -1,13 +1,16 @@
-const express = require("express")
-const router = express.Router()
-const urlController = require("../controller/urlController")
+const express = require("express");
+const router = express.Router();
+const urlController = require("../controller/urlController");
 
 
-router.get("/test-me",function(req,res){
-    res.send("okk fine")
+router.post("/url/shorten", urlController.createShortUrl);
+
+router.get("/:urlCode", urlController.redirect);
+
+
+router.all("/*", function(req,res){
+res.status(400).send({status: false, message: "Invalid Request" });
 })
 
-router.post("/url/shorten",urlController.shortUrlData)
-router.get("/:urlCode",urlController.redirect)
 
-module.exports= router
+module.exports = router
