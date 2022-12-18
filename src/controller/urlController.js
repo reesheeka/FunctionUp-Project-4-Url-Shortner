@@ -16,7 +16,7 @@ function isValidURL(value) {
 }
 
 
-//------------------------------REDIS IMPLEMENTATION----------------------//
+//------------------------------[REDIS IMPLEMENTATION]-------------------------//
 
 const redisClient = redis.createClient(
     11034,
@@ -35,7 +35,7 @@ const SET_ASYNC = promisify(redisClient.SET).bind(redisClient);
 const GET_ASYNC = promisify(redisClient.GET).bind(redisClient);
 
 
-//----------------------------[CREATE SHORTURL]----------------------------------
+//----------------------------[CREATE SHORTURL]--------------------------------//
 
 const createShortUrl = async function (req, res) {
     try {
@@ -63,8 +63,9 @@ const createShortUrl = async function (req, res) {
             const baseUrl = "http://localhost:3000"
             let shortUrl = baseUrl + "/" + urlCode
 
-            const urlData = await urlModel.create({ longUrl: longUrl, shortUrl: shortUrl, urlCode: urlCode })
-            let savedData = await urlModel.findOne({ _id: urlData._id }).select({ _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
+            let urlData = await urlModel.create({ longUrl: longUrl, shortUrl: shortUrl, urlCode: urlCode })
+
+            const savedData = await urlModel.findOne({ _id: urlData._id }).select({ _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 
             return res.status(201).send({ status: true, data: savedData });
         }
@@ -75,7 +76,7 @@ const createShortUrl = async function (req, res) {
     }
 }
 
-//-----------------------------[Redirecting to LongUrl]------------------------------------------
+//-----------------------------[Redirecting to LongUrl]-----------------------------//
 
 
 const redirect = async function (req, res) {

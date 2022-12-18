@@ -54,7 +54,7 @@ Use caching while fetching the shortened url to minimize db calls.
 Implement what makes sense to you and we will build understanding over the demo discussion.
 Figure out if you can also use caching while redirecting to the original url from the shortedned url
 
-Response
+# Response
 Successful Response structure
 {
   status: true,
